@@ -19,16 +19,20 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="#">About</a>
+                <a class="nav-link" href="{{ url_for('create') }}">Criar um novo post</a>
             </li>
+
             <li class="nav-item active">
-                <a class="nav-link" href="#">Teste</a>
-            </li>
+              <a class="nav-link" href="#">About</a>
+          </li>
             </ul>
         </div>
     </nav>
     <div class="container">
-        {% block content %} {% endblock %}
+      {% for message in get_flashed_messages() %}
+          <div class="alert alert-danger">{{ message }}</div>
+      {% endfor %}
+      {% block content %} {% endblock %}
     </div>
 
     <!-- Optional JavaScript -->
