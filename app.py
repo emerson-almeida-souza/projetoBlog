@@ -1,8 +1,5 @@
-from crypt import methods
 import sqlite3
-from turtle import title
 from flask import Flask, redirect, render_template, request, url_for, flash
-import flask
 from werkzeug.exceptions import abort  
 
 app = Flask(__name__)
