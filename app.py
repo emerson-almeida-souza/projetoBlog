@@ -1,3 +1,4 @@
+from poplib import POP3_SSL_PORT
 import sqlite3
 from flask import Flask, redirect, render_template, request, url_for, flash
 from werkzeug.exceptions import abort  
@@ -68,6 +69,15 @@ def edit(id):
     
     return render_template('edit.html', post=post)
 
+@app.route('/<int:id>/delete', methods=('POST',))
+def delete(id):
+    post = get_post(id)
+    conn = get_db_connection()
+    conn.execute('DELETE FROM posts where id = ?', (id,))
+    conn.commit()
+    conn.close()
+    flash('"{}" was successfully deleted!'.format(post['title']))
+    return redirect(url_for('index'))
 
 app.run(debug=True)
 #teste
